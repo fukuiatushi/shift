@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>勤務者検索</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 15px;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="date"] {
+            font-size: 1.2rem;
+            padding: 6px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 8px 16px;
+            margin-left: 10px;
+        }
+
+        .section {
+            margin: 25px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 1.2rem;
+        }
+
+        li {
+            margin: 6px 0;
+        }
+
+        .night {
+            font-weight: bold;
+            color: #d9534f;
+        }
+        li {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>勤務者検索</h2>
+
+<form method="get">
+    <input type="date" name="date" required>
+    <button type="submit">検索</button>
+</form>
+
+{% if date %}
+<hr>
+
+<h2>{{ title }}</h2>
+
+<h3>{{ date }}（{{ weekday }}）</h3>
+
+{% if event %}
+    <p style="text-align:center; font-weight:bold; color:#0077cc; font-size:1.2rem;">
+        施設行事：{{ event }}
+    </p>
+{% endif %}
+
+<!-- 洗濯担当 -->
+<p style="text-align:center; font-size:1.2rem;">
+    <strong>洗濯：</strong>
+    {% if laundry %}
+        {{ laundry }}
+    {% else %}
+        （担当者なし）
+    {% endif %}
+</p>
+
+<!-- 1階 -->
+<div class="section">
+    <h3>【１階】</h3>
+    <ul>
+        {% for s in floor1 %}
+            <li>{{ s.code }}：{{ s.staff.name }}</li>
+        {% empty %}
+            <li>（該当者なし）</li>
+        {% endfor %}
+    </ul>
+
+    {% if night1 %}
+        <p class="night" style="text-align:center;">
+            夜勤明け：{{ night1|join:", " }}
+        </p>
+    {% endif %}
+</div>
+
+
+<!-- 2階 -->
+<div class="section">
+    <h3>【２階】</h3>
+    <ul>
+        {% for s in floor2 %}
+            <li>{{ s.code }}：{{ s.staff.name }}</li>
+        {% empty %}
+            <li>（該当者なし）</li>
+        {% endfor %}
+    </ul>
+
+    {% if night2 %}
+        <p class="night" style="text-align:center;">
+            夜勤明け：{{ night2|join:", " }}
+        </p>
+    {% endif %}
+</div>
+
+    </ul>
+</div>
+
+{% endif %}
+
+</body>
+</html>
+
+

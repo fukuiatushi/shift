@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>勤務者検索</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        h2 { text-align: center; margin-bottom: 20px; }
+
+        form { text-align: center; }
+
+        input[type="date"] {
+            font-size: 1.2rem;
+            padding: 8px;
+            width: 250px;
+            max-width: 90%;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            input[type="date"], button {
+                width: 90%;
+                display: block;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>勤務者検索</h2>
+
+<form action="{% url 'shift_result' %}" method="get">
+    <input type="date" name="date" required>
+    <button type="submit">検索</button>
+</form>
+
+</body>
+</html>
