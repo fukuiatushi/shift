@@ -1,4 +1,5 @@
 from django.db import models
+from .utils import import_shift_excel
 
 class Staff(models.Model):
     name = models.CharField(max_length=100)
@@ -28,6 +29,11 @@ class ShiftFile(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+    import_shift_excel(self.file.path, self.title)
+
 
 
 
