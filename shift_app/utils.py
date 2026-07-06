@@ -3,8 +3,8 @@ import openpyxl
 from datetime import datetime
 import re
 
-def import_shift_excel(file_path, shiftfile_title):
-    wb = openpyxl.load_workbook(file_path, data_only=True)
+def import_shift_excel(file_obj, shiftfile_title):
+    wb = openpyxl.load_workbook(file_obj, data_only=True)
     ws = wb.active
 
     # ★ Excel A1 から勤務月を取得

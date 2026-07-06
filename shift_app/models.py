@@ -40,4 +40,4 @@ class ShiftFile(models.Model):
         Shift.objects.all().delete()
 
         # ★ Excel → Shift の取り込み処理を自動実行
-        import_shift_excel(self.file.path, self.title)
+        import_shift_excel(self.file, self.title)
