@@ -1,5 +1,4 @@
 from django.db import models
-from .utils import import_shift_excel
 
 class Staff(models.Model):
     name = models.CharField(max_length=100)
@@ -32,9 +31,9 @@ class ShiftFile(models.Model):
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-    import_shift_excel(self.file.path, self.title)
 
+        # ★ 遅延 import（循環を防止）
+        from .utils import import_shift_excel
 
-
-
-    
+        # ★ Excel → Shift の取り込み処理を自動実行
+        import_shift_excel(self.file.path, self.title)
