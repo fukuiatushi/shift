@@ -34,6 +34,10 @@ class ShiftFile(models.Model):
 
         # ★ 遅延 import（循環を防止）
         from .utils import import_shift_excel
+        from .models import Shift
+        
+        #古いデータの削除
+        Shift.objects.all().delete()
 
         # ★ Excel → Shift の取り込み処理を自動実行
         import_shift_excel(self.file.path, self.title)
