@@ -43,8 +43,8 @@ def import_shift_excel(file_obj, shiftfile_title):
     # ★ 曜日行（CSV で確認済み）
     weekday_row = 3
 
-    # ★ 行事行（CSV で確認済み → 6行目）
-    event_row = 6
+    # ★ 行事行は曜日行の次の行を自動検出
+    event_row = weekday_row + 1
 
     # ★ 職員名と勤務コードを読み取る
     for row in range(staff_start_row, ws.max_row + 1):
@@ -86,5 +86,3 @@ def import_shift_excel(file_obj, shiftfile_title):
             )
 
     return shiftfile_title
-
-
